@@ -1,0 +1,445 @@
+.auth-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.submit-btn {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #3a80d2;
+}
+
+.submit-btn:disabled {
+  background-color: #a0c2e8;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #e53935;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.success-message {
+  color: #43a047;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.auth-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.auth-link a {
+  color: #4a90e2;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
+}
+
+/* 아이디 중복 확인을 위한 스타일 */
+.input-with-button {
+  display: flex;
+  gap: 8px;
+}
+
+.input-with-button input {
+  flex: 1;
+}
+
+.check-button {
+  padding: 8px 12px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s;
+}
+
+.check-button:hover {
+  background-color: #3a80d2;
+}
+
+.check-button:disabled {
+  background-color: #a0c2e8;
+  cursor: not-allowed;
+}
+
+/* 비밀번호 강도 표시 관련 스타일 */
+.password-input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-container input {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+/* 눈 모양 아이콘 스타일 수정 */
+.eye-icon {
+  position: relative;
+  width: 20px;
+  height: 14px;
+  display: inline-block;
+  border: 2px solid #666;
+  border-radius: 70% / 90%;
+}
+
+.eye-icon::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #666;
+}
+
+/* 가려진 눈 (슬래시 있는 눈) 아이콘 */
+.eye-icon::after {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  width: 30px;
+  height: 2px;
+  background-color: #e53935;
+  transform: rotate(45deg);
+  transition: all 0.2s;
+}
+
+/* 보이는 눈 아이콘 (슬래시 없음) */
+.eye-icon.visible::after {
+  opacity: 0;
+}
+
+.password-strength-container {
+  margin-top: 5px;
+}
+
+.password-strength-bar {
+  height: 5px;
+  border-radius: 2px;
+  transition: all 0.3s;
+  margin-bottom: 5px;
+}
+
+.password-strength-unusable {
+  background-color: #e53935;
+  width: 33%;
+}
+
+.password-strength-medium {
+  background-color: #ffa000;
+  width: 66%;
+}
+
+.password-strength-safe {
+  background-color: #43a047;
+  width: 100%;
+}
+
+.password-strength-message {
+  font-size: 12px;
+  margin: 0;
+}
+
+.password-strength-message.password-strength-unusable {
+  color: #e53935;
+  width: auto;
+  background-color: transparent;
+}
+
+.password-strength-message.password-strength-medium {
+  color: #ffa000;
+  width: auto;
+  background-color: transparent;
+}
+
+.password-strength-message.password-strength-safe {
+  color: #43a047;
+  width: auto;
+  background-color: transparent;
+}
+
+/* 이메일 입력 관련 스타일 */
+.email-input-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.email-id-input {
+  flex: 1;
+  min-width: 120px;
+}
+
+.email-at {
+  font-weight: bold;
+  padding: 0 5px;
+}
+
+.email-domain-input {
+  flex: 1;
+  min-width: 120px;
+}
+
+.email-domain-select {
+  width: 120px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+/* 알레르기 체크박스 관련 스타일 */
+.allergy-section {
+  margin-top: 5px;
+}
+
+.allergy-description {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.allergy-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.allergy-checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px 10px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.allergy-checkbox-label:hover {
+  background-color: #e0e0e0;
+}
+
+.allergy-checkbox {
+  margin-right: 5px;
+}
+
+.allergy-checkbox-label input:checked + span {
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .email-input-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .email-id-input,
+  .email-domain-input,
+  .email-domain-select {
+    width: 100%;
+  }
+  
+  .email-at {
+    align-self: flex-start;
+    margin: -5px 0;
+  }
+}
+
+/* 아이디/비밀번호 찾기 관련 스타일 */
+.find-account-container .tabs {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.find-account-container .tab-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #666;
+}
+
+.find-account-container .tab-btn.active {
+  color: #4a6bff;
+  font-weight: bold;
+  border-bottom: 2px solid #4a6bff;
+}
+
+.find-account-container .tab-content {
+  padding-top: 10px;
+}
+
+.find-account-container .result-container {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.find-account-container .result-box {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px 0;
+  background-color: #f9f9f9;
+}
+
+.find-account-container .result-box strong {
+  color: #4a6bff;
+  font-size: 1.1em;
+}
+
+.find-account-container .small-text {
+  font-size: 0.85em;
+  color: #666;
+  margin-top: 10px;
+}
+
+.find-account-container .button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.find-account-container .primary-btn,
+.find-account-container .secondary-btn {
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.find-account-container .primary-btn {
+  background-color: #4a6bff;
+  color: white;
+}
+
+.find-account-container .primary-btn:hover {
+  background-color: #3650c9;
+}
+
+.find-account-container .secondary-btn {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.find-account-container .secondary-btn:hover {
+  background-color: #e0e0e0;
+}
+
+/* 로그인 페이지 계정 찾기 링크 */
+.account-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.account-links a {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.account-links a:hover {
+  color: #4a6bff;
+  text-decoration: underline;
+} 

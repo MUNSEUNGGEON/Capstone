@@ -1,0 +1,97 @@
+.menu-bar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  border-radius: 15px;
+  margin: 20px auto;
+  max-width: 1200px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.menu-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  color: white;
+  text-decoration: none;
+}
+
+.menu-icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.menu-text {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .menu-container {
+    gap: 15px;
+  }
+  
+  .menu-item {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .menu-icon {
+    font-size: 24px;
+  }
+  
+  .menu-text {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-container {
+    gap: 10px;
+  }
+  
+  .menu-item {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .menu-icon {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+  
+  .menu-text {
+    font-size: 9px;
+  }
+} 

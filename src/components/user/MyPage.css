@@ -1,0 +1,506 @@
+.mypage-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mypage-content-wrapper {
+  padding: 30px;
+}
+
+.mypage-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.mypage-header h1 {
+  color: #333;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.loading-message {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #c3e6cb;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #f5c6cb;
+}
+
+/* 비밀번호 변경 섹션 스타일 */
+.password-section {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.password-form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.password-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-container input {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+/* 눈 모양 아이콘 스타일 (회원가입과 동일) */
+.eye-icon {
+  position: relative;
+  width: 20px;
+  height: 14px;
+  display: inline-block;
+  border: 2px solid #666;
+  border-radius: 70% / 90%;
+}
+
+.eye-icon::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #666;
+}
+
+/* 가려진 눈 (슬래시 있는 눈) 아이콘 */
+.eye-icon::after {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  width: 30px;
+  height: 2px;
+  background-color: #e53935;
+  transform: rotate(45deg);
+  transition: all 0.2s;
+}
+
+/* 보이는 눈 아이콘 (슬래시 없음) */
+.eye-icon.visible::after {
+  opacity: 0;
+}
+
+.password-strength-container {
+  margin-top: 5px;
+}
+
+.password-strength-bar {
+  height: 5px;
+  border-radius: 2px;
+  transition: all 0.3s;
+  margin-bottom: 5px;
+}
+
+.password-strength-unusable {
+  background-color: #e53935;
+  width: 33%;
+}
+
+.password-strength-medium {
+  background-color: #ffa000;
+  width: 66%;
+}
+
+.password-strength-safe {
+  background-color: #43a047;
+  width: 100%;
+}
+
+.password-strength-message {
+  font-size: 12px;
+  margin: 0;
+}
+
+.password-strength-message.password-strength-unusable {
+  color: #e53935;
+  width: auto;
+  background-color: transparent;
+}
+
+.password-strength-message.password-strength-medium {
+  color: #ffa000;
+  width: auto;
+  background-color: transparent;
+}
+
+.password-strength-message.password-strength-safe {
+  color: #43a047;
+  width: auto;
+  background-color: transparent;
+}
+
+.password-button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.password-button-group .save-btn,
+.password-button-group .cancel-btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.password-button-group .save-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.password-button-group .save-btn:hover {
+  background-color: #0056b3;
+}
+
+.password-button-group .cancel-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.password-button-group .cancel-btn:hover {
+  background-color: #545b62;
+}
+
+.mypage-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.profile-section,
+.allergy-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  color: #333;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+/* 읽기 전용 필드 스타일 */
+.readonly-field {
+  background-color: #f8f9fa !important;
+  color: #6c757d !important;
+  cursor: not-allowed;
+  border-color: #dee2e6 !important;
+}
+
+.readonly-field:focus {
+  border-color: #dee2e6 !important;
+  box-shadow: none !important;
+}
+
+.field-note {
+  color: #6c757d;
+  font-size: 12px;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* 아이디 중복 확인을 위한 스타일 */
+.input-with-button {
+  display: flex;
+  gap: 8px;
+}
+
+.input-with-button input {
+  flex: 1;
+}
+
+.check-button {
+  padding: 8px 12px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s;
+}
+
+.check-button:hover {
+  background-color: #3a80d2;
+}
+
+.check-button:disabled {
+  background-color: #a0c2e8;
+  cursor: not-allowed;
+}
+
+/* 이메일 입력 관련 스타일 */
+.email-input-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.email-id-input {
+  flex: 1;
+  min-width: 120px;
+}
+
+.email-at {
+  font-weight: bold;
+  padding: 0 5px;
+}
+
+.email-domain-input {
+  flex: 1;
+  min-width: 120px;
+}
+
+.email-domain-select {
+  width: 120px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+/* 알레르기 체크박스 관련 스타일 */
+.allergy-section {
+  margin-top: 20px;
+}
+
+.allergy-description {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.allergy-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.allergy-checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px 10px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.allergy-checkbox-label:hover {
+  background-color: #e0e0e0;
+}
+
+.allergy-checkbox {
+  margin-right: 5px;
+}
+
+.allergy-checkbox-label input:checked + span {
+  font-weight: bold;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.save-btn,
+.cancel-btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.save-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.save-btn:hover:not(:disabled) {
+  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.save-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.cancel-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .mypage-container {
+    margin: 10px;
+  }
+
+  .mypage-content-wrapper {
+    padding: 20px;
+  }
+
+  .mypage-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .profile-section,
+  .allergy-section {
+    padding: 20px;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .save-btn,
+  .cancel-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 600px) {
+  .email-input-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .email-id-input,
+  .email-domain-input,
+  .email-domain-select {
+    width: 100%;
+  }
+  
+  .email-at {
+    align-self: flex-start;
+    margin: -5px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .mypage-container {
+    margin: 5px;
+  }
+
+  .mypage-content-wrapper {
+    padding: 15px;
+  }
+}
