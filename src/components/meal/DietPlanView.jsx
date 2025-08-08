@@ -133,13 +133,6 @@ const DietPlanView = ({
           }</span>
         )}
       </div>
-      <button
-        className="diet-create-btn"
-        onClick={() => handleRefreshMeal(selectedDate, selectedMenuItem)}
-        disabled={!selectedMenuItem}
-      >
-        새로고침
-      </button>
       {loading ? (
         <div className="loading-message">식단 정보를 불러오는 중...</div>
       ) : selectedMeal ? (
@@ -148,7 +141,16 @@ const DietPlanView = ({
             <div className="meal-block">
               <h3 className="meal-title">밥</h3>
               <ul className="meal-items">
-                <li onClick={() => handleFoodClick(selectedMeal.rice_id)} className="food-item-clickable">{selectedMeal.rice_name}</li>
+                <li>
+                  <span onClick={() => handleFoodClick(selectedMeal.rice_id)} className="food-item-clickable">{selectedMeal.rice_name}</span>
+                  <button
+                    className="refresh-meal-btn"
+                    onClick={() => handleRefreshMeal(selectedDate, 'rice')}
+                    disabled={loading}
+                  >
+                    🔄
+                  </button>
+                </li>
               </ul>
             </div>
           )}
@@ -156,7 +158,16 @@ const DietPlanView = ({
             <div className="meal-block">
               <h3 className="meal-title">국/찌개</h3>
               <ul className="meal-items">
-                <li onClick={() => handleFoodClick(selectedMeal.soup_id)} className="food-item-clickable">{selectedMeal.soup_name}</li>
+                <li>
+                  <span onClick={() => handleFoodClick(selectedMeal.soup_id)} className="food-item-clickable">{selectedMeal.soup_name}</span>
+                  <button
+                    className="refresh-meal-btn"
+                    onClick={() => handleRefreshMeal(selectedDate, 'soup')}
+                    disabled={loading}
+                  >
+                    🔄
+                  </button>
+                </li>
               </ul>
             </div>
           )}
@@ -165,10 +176,28 @@ const DietPlanView = ({
               <h3 className="meal-title">반찬</h3>
               <ul className="meal-items">
                 {selectedMeal.side_dish1_id && (
-                  <li onClick={() => handleFoodClick(selectedMeal.side_dish1_id)} className="food-item-clickable">{selectedMeal.side_dish1_name}</li>
+                  <li>
+                    <span onClick={() => handleFoodClick(selectedMeal.side_dish1_id)} className="food-item-clickable">{selectedMeal.side_dish1_name}</span>
+                    <button
+                      className="refresh-meal-btn"
+                      onClick={() => handleRefreshMeal(selectedDate, 'side_dish1')}
+                      disabled={loading}
+                    >
+                      🔄
+                    </button>
+                  </li>
                 )}
                 {selectedMeal.side_dish2_id && (
-                  <li onClick={() => handleFoodClick(selectedMeal.side_dish2_id)} className="food-item-clickable">{selectedMeal.side_dish2_name}</li>
+                  <li>
+                    <span onClick={() => handleFoodClick(selectedMeal.side_dish2_id)} className="food-item-clickable">{selectedMeal.side_dish2_name}</span>
+                    <button
+                      className="refresh-meal-btn"
+                      onClick={() => handleRefreshMeal(selectedDate, 'side_dish2')}
+                      disabled={loading}
+                    >
+                      🔄
+                    </button>
+                  </li>
                 )}
               </ul>
             </div>
@@ -177,7 +206,16 @@ const DietPlanView = ({
             <div className="meal-block">
               <h3 className="meal-title">메인요리</h3>
               <ul className="meal-items">
-                <li onClick={() => handleFoodClick(selectedMeal.main_dish_id)} className="food-item-clickable">{selectedMeal.main_dish_name}</li>
+                <li>
+                  <span onClick={() => handleFoodClick(selectedMeal.main_dish_id)} className="food-item-clickable">{selectedMeal.main_dish_name}</span>
+                  <button
+                    className="refresh-meal-btn"
+                    onClick={() => handleRefreshMeal(selectedDate, 'main_dish')}
+                    disabled={loading}
+                  >
+                    🔄
+                  </button>
+                </li>
               </ul>
             </div>
           )}
@@ -185,7 +223,16 @@ const DietPlanView = ({
             <div className="meal-block">
               <h3 className="meal-title">디저트</h3>
               <ul className="meal-items">
-                <li onClick={() => handleFoodClick(selectedMeal.dessert_id)} className="food-item-clickable">{selectedMeal.dessert_name}</li>
+                <li>
+                  <span onClick={() => handleFoodClick(selectedMeal.dessert_id)} className="food-item-clickable">{selectedMeal.dessert_name}</span>
+                  <button
+                    className="refresh-meal-btn"
+                    onClick={() => handleRefreshMeal(selectedDate, 'dessert')}
+                    disabled={loading}
+                  >
+                    🔄
+                  </button>
+                </li>
               </ul>
             </div>
           )}
