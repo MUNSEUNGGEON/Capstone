@@ -116,40 +116,29 @@ export const regenerateMeal = async (date) => {
 };
 
 // 임베딩/영양소 기반 새로고침
-export const refreshMeal = async (date) => {
-  try {
-    const authHeader = getAuthHeader();
-    const response = await axios.post(
-      `${API_URL}/meals/refresh/${date}`,
-      {},
-      authHeader
-    );
-    return response.data;
-  } catch (error) {
-    console.error('식단 새로고침 오류:', error);
-    if (error.response) {
-      console.error('서버 응답:', error.response.status, error.response.data);
-    }
-    throw error;
-  }
+export const refreshMeal = async (date, item = null) => {
+  const authHeader = getAuthHeader();
+  const body = item ? { item } : {};
+  const response = await axios.post(
+    `${API_URL}/meals/refresh/${date}`,
+    body,
+    authHeader
+  );
+  return response.data;
 };
 
 export const getMealNutritionByDate = async (date, token) => {
-  try {
-    const response = await fetch(
-      `${API_URL}/meal-nutrition/${date}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: token ? `Bearer ${token}` : undefined,
-        },
-      }
-    );
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.message || '영양소 정보 조회 실패');
-    return data;
-  } catch (error) {
-    throw error;
-  }
+  const response = await fetch(
+    `${API_URL}/meal-nutrition/${date}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token ? `Bearer ${token}` : undefined,
+      },
+    }
+  );
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message || '영양소 정보 조회 실패');
+  return data;
 };
