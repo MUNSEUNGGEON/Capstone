@@ -568,6 +568,23 @@
   opacity: 1;
 }
 
+/* 개별 식단 새로고침 버튼 */
+.refresh-meal-btn {
+  margin-left: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #4285f4;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.refresh-meal-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* 음식 상세 정보 모달 */
 .food-detail-modal {
   position: fixed;
