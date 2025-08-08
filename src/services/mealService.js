@@ -115,6 +115,25 @@ export const regenerateMeal = async (date) => {
   }
 };
 
+// 임베딩/영양소 기반 새로고침
+export const refreshMeal = async (date) => {
+  try {
+    const authHeader = getAuthHeader();
+    const response = await axios.post(
+      `${API_URL}/meals/refresh/${date}`,
+      {},
+      authHeader
+    );
+    return response.data;
+  } catch (error) {
+    console.error('식단 새로고침 오류:', error);
+    if (error.response) {
+      console.error('서버 응답:', error.response.status, error.response.data);
+    }
+    throw error;
+  }
+};
+
 export const getMealNutritionByDate = async (date, token) => {
   try {
     const response = await fetch(
