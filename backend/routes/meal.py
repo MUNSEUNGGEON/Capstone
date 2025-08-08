@@ -6,7 +6,7 @@ from models.meal import Meal
 from services.meal_generate_daily import generate_daily_meal
 from services.meal_generate_weekly import generate_weekly_meal
 from services.meal_generate_monthly import generate_monthly_meal as generate_monthly_meal_plan
-from services.meal_refresh import refresh_daily_meal
+from services.meal_refresh import refresh_daily_meal, refresh_single_menu_item
 from utils.auth import token_required
 from flask_cors import cross_origin
 
@@ -192,7 +192,11 @@ def refresh_meal(current_user, date_str):
             'fat': 20,
             'sodium': 700,
         })
-        result = refresh_daily_meal(user_id, date, target_nutrition)
+        item = data.get('item')
+        if item:
+            result = refresh_single_menu_item(user_id, date, item, target_nutrition)
+        else:
+            result = refresh_daily_meal(user_id, date, target_nutrition)
         if result:
             meal = Meal.get_by_user_and_date(user_id, date)
             return jsonify({'success': True, 'meal': meal, 'nutrition': result.get('nutrition')})

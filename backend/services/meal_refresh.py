@@ -105,3 +105,86 @@ def refresh_daily_meal(user_id: int, date: datetime.date, target_nutrition: Dict
 
     nutrition_summary = save_meal_total_nutrition(meal_id, best_ids)
     return {'meal_id': meal_id, 'nutrition': nutrition_summary}
+
+
+def refresh_single_menu_item(user_id: int, date: datetime.date, item: str, target_nutrition: Dict[str, float] = None):
+    """Refresh only a single menu item for a given date and user."""
+    if date is None:
+        date = datetime.date.today()
+
+    foods = filter_foods_by_allergy(user_id)
+
+    role_map = {
+        'rice': '밥',
+        'soup': '국&찌개',
+        'side_dish1': '반찬',
+        'side_dish2': '반찬',
+        'main_dish': '일품',
+        'dessert': '후식',
+    }
+
+    role = role_map.get(item)
+    if role is None:
+        raise ValueError('Invalid menu item')
+
+    candidates = [f for f in foods if f['Food_role'] == role]
+    if not candidates:
+        return None
+
+    meal = Meal.get_by_user_and_date(user_id, date)
+    if not meal:
+        return None
+
+    current_ids = {
+        'rice': meal.get('Rice_id'),
+        'soup': meal.get('Soup_id'),
+        'side_dish1': meal.get('SideDish1_id'),
+        'side_dish2': meal.get('SideDish2_id'),
+        'main_dish': meal.get('MainDish_id'),
+        'dessert': meal.get('Dessert_id'),
+    }
+
+    # Remove current item and the other side dish to avoid duplicates
+    other_side = None
+    if item == 'side_dish1':
+        other_side = current_ids['side_dish2']
+    elif item == 'side_dish2':
+        other_side = current_ids['side_dish1']
+
+    filtered = [f for f in candidates if f['Food_id'] != current_ids[item] and f['Food_id'] != other_side]
+    if not filtered:
+        filtered = candidates
+
+    new_food = random.choice(filtered)
+
+    meal_obj = Meal(
+        Meal_id=meal['Meal_id'],
+        User_id=user_id,
+        Date=date,
+        Rice_id=current_ids['rice'],
+        Soup_id=current_ids['soup'],
+        SideDish1_id=current_ids['side_dish1'],
+        SideDish2_id=current_ids['side_dish2'],
+        MainDish_id=current_ids['main_dish'],
+        Dessert_id=current_ids['dessert'],
+    )
+
+    if item == 'rice':
+        meal_obj.Rice_id = new_food['Food_id']
+    elif item == 'soup':
+        meal_obj.Soup_id = new_food['Food_id']
+    elif item == 'side_dish1':
+        meal_obj.SideDish1_id = new_food['Food_id']
+    elif item == 'side_dish2':
+        meal_obj.SideDish2_id = new_food['Food_id']
+    elif item == 'main_dish':
+        meal_obj.MainDish_id = new_food['Food_id']
+    elif item == 'dessert':
+        meal_obj.Dessert_id = new_food['Food_id']
+
+    meal_obj.save()
+
+    food_ids = [fid for fid in [meal_obj.Rice_id, meal_obj.Soup_id, meal_obj.SideDish1_id,
+                                 meal_obj.SideDish2_id, meal_obj.MainDish_id, meal_obj.Dessert_id] if fid]
+    nutrition_summary = save_meal_total_nutrition(meal_obj.Meal_id, food_ids)
+    return {'meal_id': meal_obj.Meal_id, 'nutrition': nutrition_summary}

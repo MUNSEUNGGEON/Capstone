@@ -7,7 +7,7 @@ const DietPlanView = ({
   currentDate, viewType, handleViewTypeChange, generating, error,
   weekdays, days, prevMonth, nextMonth, formatMonth, expandedDate, isSameDate, isCurrentMonth, isWeekend,
   handleDateClick, hasMealData, meals, formatDateString, selectedMenuItem, handleMenuItemClick, handleFoodClick,
-  formatDate, selectedDate, formatSelectedDate, loading, selectedMeal, handleRegenerateMeal, showFoodDetail, selectedFoodId, handleCloseFoodDetail,
+  formatDate, selectedDate, formatSelectedDate, loading, selectedMeal, showFoodDetail, selectedFoodId, handleCloseFoodDetail,
   handleRefreshMeal,
   showGenerateOptions, handleShowGenerateOptions, handleGenerateByType
 }) => (
@@ -133,7 +133,13 @@ const DietPlanView = ({
           }</span>
         )}
       </div>
-      <button className="diet-create-btn" onClick={() => handleRefreshMeal(selectedDate)}>새로고침</button>
+      <button
+        className="diet-create-btn"
+        onClick={() => handleRefreshMeal(selectedDate, selectedMenuItem)}
+        disabled={!selectedMenuItem}
+      >
+        새로고침
+      </button>
       {loading ? (
         <div className="loading-message">식단 정보를 불러오는 중...</div>
       ) : selectedMeal ? (

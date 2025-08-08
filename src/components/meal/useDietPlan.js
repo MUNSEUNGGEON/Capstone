@@ -83,11 +83,15 @@ export default function useDietPlan() {
     }
   };
 
-  const handleRefreshMeal = async (date) => {
+  const handleRefreshMeal = async (date, item) => {
+    if (!item) {
+      setError('새로고칠 메뉴를 선택해주세요.');
+      return;
+    }
     try {
       setLoading(true);
       const dateString = formatDateString(date);
-      const response = await refreshMeal(dateString);
+      const response = await refreshMeal(dateString, item);
       if (response.success) {
         loadMeals();
         if (response.meal) {
