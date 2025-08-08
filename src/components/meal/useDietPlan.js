@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getMonthlyMeals, generateMonthlyMeals, regenerateMeal } from '../../services/mealService';
+import { getMonthlyMeals, generateMonthlyMeals, regenerateMeal, refreshMeal } from '../../services/mealService';
 import axios from 'axios';
 
 export default function useDietPlan() {
@@ -77,6 +77,28 @@ export default function useDietPlan() {
       }
     } catch (err) {
       setError('서버에 연결할 수 없거나 식단 재생성에 실패했습니다.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRefreshMeal = async (date, itemType) => {
+    if (!itemType) return;
+    try {
+      setLoading(true);
+      const dateString = formatDateString(date);
+      const response = await refreshMeal(dateString, itemType);
+      if (response.success) {
+        loadMeals();
+        if (response.meal) {
+          setSelectedMeal(response.meal);
+        }
+      } else {
+        setError(response.message || '메뉴 새로고침에 실패했습니다.');
+      }
+    } catch (err) {
+      setError('서버에 연결할 수 없거나 메뉴 새로고침에 실패했습니다.');
       console.error(err);
     } finally {
       setLoading(false);
@@ -283,7 +305,7 @@ export default function useDietPlan() {
     meals, setMeals, selectedMeal, setSelectedMeal, loading, setLoading, error, setError,
     generating, setGenerating, expandedDate, setExpandedDate, selectedMenuItem, setSelectedMenuItem,
     selectedFoodId, setSelectedFoodId, showFoodDetail, setShowFoodDetail,
-    loadMeals, handleGenerateMeals, handleRegenerateMeal, getDaysInMonth, handleDateClick,
+    loadMeals, handleGenerateMeals, handleRegenerateMeal, handleRefreshMeal, getDaysInMonth, handleDateClick,
     handleMenuItemClick, handleFoodClick, handleCloseFoodDetail, prevMonth, nextMonth, goToToday,
     formatDate, formatDateString, formatMonth, formatSelectedDate, isSameDate, isCurrentMonth, isWeekend,
     handleViewTypeChange, hasMealData, weekdays, days,

@@ -6,6 +6,7 @@ from models.meal import Meal
 from services.meal_generate_daily import generate_daily_meal
 from services.meal_generate_weekly import generate_weekly_meal
 from services.meal_generate_monthly import generate_monthly_meal as generate_monthly_meal_plan
+from services.meal_refresh import refresh_meal_item
 from utils.auth import token_required
 from flask_cors import cross_origin
 
@@ -176,7 +177,33 @@ def regenerate_meal(current_user, date_str):
             'message': f'식단 다시 생성 중 오류가 발생했습니다: {str(e)}'
         }), 500
 
-# 6️⃣ 월별 식단 조회
+# 6️⃣ 특정 날짜의 메뉴 새로고침
+@meal_bp.route('/api/meals/refresh/<string:date_str>/<string:item_type>', methods=['POST'])
+@token_required
+def refresh_menu_item_route(current_user, date_str, item_type):
+    try:
+        user_id = current_user['User_id']
+        date = datetime.datetime.strptime(date_str, '%Y-%m-%d').date()
+        data = request.get_json() or {}
+        target_nutrition = data.get('target_nutrition', {
+            'calories': 600,
+            'carbohydrate': 75,
+            'protein': 20,
+            'fat': 20,
+            'sodium': 700,
+        })
+        result = refresh_meal_item(user_id, date, item_type, target_nutrition)
+        if result:
+            meal = Meal.get_by_user_and_date(user_id, date)
+            return jsonify({'success': True, 'meal': meal, 'nutrition': result.get('nutrition')})
+        else:
+            return jsonify({'success': False, 'message': '메뉴 새로고침에 실패했습니다.'}), 500
+    except Exception as e:
+        print(f"❌ 메뉴 새로고침 오류: {e}")
+        traceback.print_exc()
+        return jsonify({'success': False, 'message': str(e)}), 500
+
+# 7️⃣ 월별 식단 조회
 @meal_bp.route('/api/meals/monthly', methods=['GET'])
 @token_required
 def get_monthly_meals(current_user):
